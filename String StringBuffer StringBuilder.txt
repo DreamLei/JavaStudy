@@ -10,7 +10,7 @@ String StringBuffer StringBuilder之间的区别
  System.out.println(str);
  str=str+"45";
  System.out.println(str);
-    如果运行这段代码会发现先输出“123”，然后又输出“12345”，好像是str这个对象被更改了，其实，这只是一种假象罢了，JVM对于这几行代码是这样处理的，首先创建一个String对象str，并把“123”赋值给str，然后在第三行中，其实JVM又创建了一个新的对象也名为str，然后再把原来的str的值和“de”加起来再赋值给新的str，而原来的str就会被JVM的垃圾回收机制（GC）给回收掉了，所以，str实际上并没有被更改，也就是前面说的String对象一旦创建之后就不可更改了。所以，Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。可是StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
+    如果运行这段代码会发现先输出“123”，然后又输出“12345”，此时不是简单得在常量池里面将123的字符串加上45就完事的，而是此时的str+="45";相当于str = new StringBuffer(str).append("45").toString();所以String每次用“+”链接都相当于在堆内存中先实例化一个StringBuffer然后再调用其append方法，最后调用toString方法转换成字符串。所以String比StringBuilder和StringBuffer慢。
 
 2、在线程安全上：StringBuilder是线程不安全的，而StringBuffer是线程安全的
 
