@@ -1,21 +1,33 @@
 package com.google.javase.day3;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Test {
 
 	public static void main(String[] args) {
-		Main m=new Main();
-		MaxAry n=new Main();
-		m.maina();
-		n.maina();
-		Date dete=new Date();
-		String str=dete.toString();
-		System.out.println(str);
-		Class c1=new ArrayList<String>().getClass();
-		Class c2=new ArrayList<Integer>().getClass();
-		System.out.println(c1==c2);
+		Set<MyClass> set=new HashSet<MyClass>();
+		
+		set.add(new MyClass(5));
+		set.add(new MyClass(2));
+		set.add(new MyClass(6));
+		System.out.println(set.size());
+		
 	}
 
+}
+class MyClass{
+	Integer i;
+	public MyClass(Integer y) {
+		i=y;
+	}
+	public boolean equals(MyClass o) {
+		return false;
+	}
+	public boolean equals(Object o) {
+		return true;
+	}
+	public int hashCode() {
+		return 32;
+	}
 }
