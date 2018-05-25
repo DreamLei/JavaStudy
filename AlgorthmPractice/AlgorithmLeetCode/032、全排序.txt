@@ -1,0 +1,40 @@
+
+给定一个没有重复数字的序列，返回其所有可能的全排列。
+
+示例:
+
+输入: [1,2,3]
+输出:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res;
+        List<List<Integer>> re=new ArrayList<List<Integer>>();
+        List<Integer> help=new ArrayList<Integer>();
+        re.add(help);
+        if(nums.length==0){
+            return re;
+        }
+        for(int i=0;i<nums.length;++i){
+            res=new ArrayList<List<Integer>>();
+            for(int j=0;j<re.size();++j){
+                help=new ArrayList<Integer>(re.get(j));
+                for(int k=0;k<help.size()+1;k++){
+                    help.add(k,nums[i]);
+                    List<Integer> he=new ArrayList<Integer>(help);
+                    help.remove(k);
+                    res.add(he);
+                }
+            }
+            re=new ArrayList<List<Integer>>(res);
+        }
+        return re;
+    }
+}
